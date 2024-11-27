@@ -1,0 +1,76 @@
+{
+  "name": "remark-math",
+  "private": true,
+  "repository": "https://github.com/remarkjs/remark-math",
+  "bugs": "https://github.com/remarkjs/remark-math/issues",
+  "author": "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io)",
+  "contributors": [
+    "Junyoung Choi <fluke8259@gmail.com> (https://rokt33r.github.io)",
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+    "Victor Felder <victor@draft.li>",
+    "TANIGUCHI Masaya <mew@cat.ovh>",
+    "Xiaoru Li <dev@xiaoru.li>",
+    "Daniel Perez Alvarez <unindented@gmail.com>",
+    "John Jeng <j3@sagemath.com>",
+    "Marc-Antoine Ouimet <ouimetmarcantoine@gmail.com>",
+    "Rongjian Zhang <pd4d10@gmail.com>"
+  ],
+  "type": "module",
+  "workspaces": [
+    "packages/rehype-katex/",
+    "packages/remark-math/",
+    "packages/rehype-mathjax/"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "c8": "^10.0.0",
+    "prettier": "^3.0.0",
+    "rehype-parse": "^9.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-cli": "^12.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-preset-wooorm": "^10.0.0",
+    "remark-rehype": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "type-coverage": "^2.0.0",
+    "typescript": "^5.0.0",
+    "unified": "^11.0.0",
+    "unist-util-remove-position": "^5.0.0",
+    "xo": "^0.59.0"
+  },
+  "scripts": {
+    "build": "tsc --build --clean && tsc --build && type-coverage",
+    "format": "remark . --frail --output --quiet && prettier . --log-level warn --write && xo --fix",
+    "test": "npm run build && npm run format && npm run test-coverage",
+    "test-api": "npm run test-api --workspaces",
+    "test-coverage": "c8 --100 --reporter lcov npm run test-api"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-wooorm"
+    ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "#": "needed `any`s",
+    "ignoreFiles": [
+      "packages/rehype-mathjax/lib/create-plugin.d.ts",
+      "packages/rehype-mathjax/lib/create-renderer.d.ts",
+      "packages/rehype-mathjax/lib/create-renderer.js"
+    ],
+    "strict": true
+  },
+  "xo": {
+    "prettier": true
+  }
+}
